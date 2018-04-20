@@ -25,16 +25,16 @@ internal class PresenterHolderFragment<P : Presenter<V, S>, V, S> : Fragment() {
     ) {
         nullablePresenter = nullablePresenter ?: presenterFactory.create()
         this.view = view
-        presenter.attachStoredState(storedStateFromLaunchingIntentOrNonNullBundle(
+        presenter.attachStoredState(storedStateFromBundleOrLaunchingIntent(
                 storedStateConverter, launchingIntent, bundle
         ))
     }
 
-    private fun storedStateFromLaunchingIntentOrNonNullBundle(
+    private fun storedStateFromBundleOrLaunchingIntent(
             storedStateConverter: StoredStateConverter<S>,
             launchingIntent: Intent,
             bundle: Bundle?
-    ): S? = (launchingIntent.extras ?: bundle)?.let(storedStateConverter::convertToStoredState)
+    ): S? = (bundle ?: launchingIntent.extras)?.let(storedStateConverter::convertToStoredState)
 
     override fun onStart() {
         super.onStart()
