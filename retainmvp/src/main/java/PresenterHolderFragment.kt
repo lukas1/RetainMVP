@@ -1,5 +1,6 @@
 package com.retainmvp.retainmvp
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
 
@@ -19,12 +20,21 @@ internal class PresenterHolderFragment<P : Presenter<V, S>, V, S> : Fragment() {
             presenterFactory: PresenterFactory<V, S, P>,
             view: V,
             storedStateConverter: StoredStateConverter<S>,
+            launchingIntent: Intent,
             bundle: Bundle?
     ) {
         nullablePresenter = nullablePresenter ?: presenterFactory.create()
         this.view = view
-        presenter.attachStoredState(bundle?.let(storedStateConverter::convertToStoredState))
+        presenter.attachStoredState(storedStateFromLaunchingIntentOrNonNullBundle(
+                storedStateConverter, launchingIntent, bundle
+        ))
     }
+
+    private fun storedStateFromLaunchingIntentOrNonNullBundle(
+            storedStateConverter: StoredStateConverter<S>,
+            launchingIntent: Intent,
+            bundle: Bundle?
+    ): S? = (launchingIntent.extras ?: bundle)?.let(storedStateConverter::convertToStoredState)
 
     override fun onStart() {
         super.onStart()

@@ -28,6 +28,7 @@ class MainActivity : AppCompatActivity(), MainActivityView {
                 MainActivityPresenter.factory,
                 MainActivityStateConverter(),
                 this,
+                intent,
                 savedInstanceState
         )
 

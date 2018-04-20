@@ -2,6 +2,7 @@ package com.retainmvp.retainmvp
 
 import android.app.Activity
 import android.app.Application
+import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.FragmentManager
 import android.support.v7.app.AppCompatActivity
@@ -14,9 +15,10 @@ object Presenters {
             presenterFactory: PresenterFactory<V, S, P>,
             storedStateConverter: StoredStateConverter<S>,
             view: V,
+            launchingIntent: Intent,
             bundle: Bundle?
     ): P = with (getHolderFragment<P, V, S>(activity.supportFragmentManager)) {
-        setup(presenterFactory, view, storedStateConverter, bundle)
+        setup(presenterFactory, view, storedStateConverter, launchingIntent, bundle)
         activity.application.registerActivityLifecycleCallbacks(
                 RetainMVPLIfeCycleCallbacksListener(activity, storedStateConverter, presenter)
         )
