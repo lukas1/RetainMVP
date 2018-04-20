@@ -1,3 +1,3 @@
-package com.retainmvp.retainmvp
+package com.retainmvp
 
 class PresenterMissingException(message: String) : Exception(message)

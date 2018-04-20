@@ -4,7 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import com.retainmvp.retainmvp.Presenters
+import com.retainmvp.Presenters
 import com.retainmvp.retainmvpexample.R
 import kotlinx.android.synthetic.main.activity_main.*
 

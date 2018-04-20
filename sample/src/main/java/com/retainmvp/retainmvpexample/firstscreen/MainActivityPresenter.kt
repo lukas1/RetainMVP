@@ -1,7 +1,7 @@
 package com.retainmvp.retainmvpexample.firstscreen
 
-import com.retainmvp.retainmvp.Presenter
-import com.retainmvp.retainmvp.PresenterFactory
+import com.retainmvp.Presenter
+import com.retainmvp.PresenterFactory
 
 class MainActivityPresenter : Presenter<MainActivityView, MainActivityStoredState>() {
     companion object {

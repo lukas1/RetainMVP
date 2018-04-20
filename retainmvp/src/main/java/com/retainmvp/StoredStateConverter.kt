@@ -1,4 +1,4 @@
-package com.retainmvp.retainmvp
+package com.retainmvp
 
 import android.os.Bundle
 

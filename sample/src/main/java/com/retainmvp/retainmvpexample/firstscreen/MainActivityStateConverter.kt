@@ -1,7 +1,7 @@
 package com.retainmvp.retainmvpexample.firstscreen
 
 import android.os.Bundle
-import com.retainmvp.retainmvp.StoredStateConverter
+import com.retainmvp.StoredStateConverter
 
 const val MainActivityBundleCounterValueKey = "MainActivityBundleCounterValueKey"
 

@@ -1,4 +1,4 @@
-package com.retainmvp.retainmvp
+package com.retainmvp
 
 abstract class Presenter<View, StoredState> {
     protected var view: View? = null
