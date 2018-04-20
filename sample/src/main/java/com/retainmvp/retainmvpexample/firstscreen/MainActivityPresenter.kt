@@ -13,9 +13,7 @@ class MainActivityPresenter : Presenter<MainActivityView, MainActivityStoredStat
     override val defaultStoredState: MainActivityStoredState
         get() = MainActivityStoredState()
 
-    override fun updateView(view: MainActivityView) {
-        view.setCounterValue(storedState.counterValue)
-    }
+    override fun updateView(view: MainActivityView) = view.setCounterValue(storedState.counterValue)
 
     fun onBumpCounterButtonPressed() {
         storedState = storedState.copy(counterValue = storedState.counterValue + 1)

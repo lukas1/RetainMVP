@@ -10,20 +10,19 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity(), MainActivityView {
     companion object {
-        fun startScreen(context: Context, counterValue: Int) {
-            val intent = Intent(context, MainActivity::class.java)
-            intent.putExtra(MainActivityBundleCounterValueKey, counterValue)
-            context.startActivity(intent)
+        fun startScreen(context: Context, counterValue: Int) = Intent(
+                context, MainActivity::class.java
+        ).run {
+            putExtra(MainActivityBundleCounterValueKey, counterValue)
+            context.startActivity(this)
         }
     }
-
-    private lateinit var presenter: MainActivityPresenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        presenter = Presenters.getPresenterForActivity(
+        val presenter = Presenters.getPresenterForActivity(
                 this,
                 MainActivityPresenter.factory,
                 MainActivityStateConverter(),
@@ -32,13 +31,9 @@ class MainActivity : AppCompatActivity(), MainActivityView {
                 savedInstanceState
         )
 
-        counterButton.setOnClickListener {
-            presenter.onBumpCounterButtonPressed()
-        }
+        counterButton.setOnClickListener { presenter.onBumpCounterButtonPressed() }
 
-        newActivityButton.setOnClickListener {
-            presenter.onNewActivityButtonPressed()
-        }
+        newActivityButton.setOnClickListener { presenter.onNewActivityButtonPressed() }
     }
 
     override fun setCounterValue(counterValue: Int) {

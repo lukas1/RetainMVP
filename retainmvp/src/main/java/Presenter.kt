@@ -12,12 +12,12 @@ abstract class Presenter<View, StoredState> {
         this.storedState = storedState ?: defaultStoredState
     }
 
-    fun attachView(view: View) {
+    internal fun attachView(view: View) {
         this.view = view
         updateView(view)
     }
 
-    fun detachView() {
+    internal fun detachView() {
         view = null
         onViewDetached()
     }
