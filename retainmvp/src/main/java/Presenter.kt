@@ -6,11 +6,14 @@ abstract class Presenter<View, StoredState> {
     var storedState: StoredState = defaultStoredState
         protected set
 
-    abstract val defaultStoredState: StoredState
+    protected abstract val defaultStoredState: StoredState
 
-    fun attachView(view: View, storedState: StoredState) {
+    internal fun attachStoredState(storedState: StoredState?) {
+        this.storedState = storedState ?: defaultStoredState
+    }
+
+    fun attachView(view: View) {
         this.view = view
-        this.storedState = storedState
         updateView(view)
     }
 

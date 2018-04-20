@@ -9,7 +9,6 @@ internal class PresenterHolderFragment<P : Presenter<V, S>, V, S> : Fragment() {
 
     private var nullablePresenter: P? = null
     private var view: V? = null
-    private var storedState: S? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,17 +23,13 @@ internal class PresenterHolderFragment<P : Presenter<V, S>, V, S> : Fragment() {
     ) {
         nullablePresenter = nullablePresenter ?: presenterFactory.create()
         this.view = view
-        this.storedState = bundle?.let(storedStateConverter::convertToStoredState) ?: presenter.defaultStoredState
+        presenter.attachStoredState(bundle?.let(storedStateConverter::convertToStoredState))
     }
 
     override fun onStart() {
         super.onStart()
 
-        view?.let { view ->
-            storedState?.let { storedState ->
-                presenter.attachView(view, storedState)
-            }
-        }
+        view?.let(presenter::attachView)
     }
 
     override fun onStop() {
