@@ -1,8 +1,9 @@
+package com.retainmvp.retainmvp
+
 abstract class Presenter<View, StoredState> {
     protected var view: View? = null
         private set
     protected var storedState: StoredState = defaultStoredState
-        private set
 
     abstract val defaultStoredState: StoredState
 
@@ -15,6 +16,10 @@ abstract class Presenter<View, StoredState> {
     fun detachView() {
         view = null
         onViewDetached()
+    }
+
+    fun updateView() {
+        view?.let(::updateView)
     }
 
     protected abstract fun updateView(view: View)
