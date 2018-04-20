@@ -3,7 +3,8 @@ package com.retainmvp.retainmvp
 abstract class Presenter<View, StoredState> {
     protected var view: View? = null
         private set
-    protected var storedState: StoredState = defaultStoredState
+    var storedState: StoredState = defaultStoredState
+        protected set
 
     abstract val defaultStoredState: StoredState
 

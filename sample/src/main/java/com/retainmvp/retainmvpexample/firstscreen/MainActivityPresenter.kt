@@ -3,9 +3,6 @@ package com.retainmvp.retainmvpexample.firstscreen
 import com.retainmvp.retainmvp.Presenter
 import com.retainmvp.retainmvp.PresenterFactory
 
-/**
- * Created by lukas on 20/04/2018.
- */
 class MainActivityPresenter : Presenter<MainActivityView, MainActivityStoredState>() {
     companion object {
         val factory = object : PresenterFactory<MainActivityView, MainActivityStoredState, MainActivityPresenter> {
@@ -21,7 +18,7 @@ class MainActivityPresenter : Presenter<MainActivityView, MainActivityStoredStat
     }
 
     fun onBumpCounterButtonPressed() {
-        storedState = storedState.copy(storedState.counterValue + 1)
+        storedState = storedState.copy(counterValue = storedState.counterValue + 1)
         updateView()
     }
 }

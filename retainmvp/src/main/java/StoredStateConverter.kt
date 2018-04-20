@@ -2,6 +2,7 @@ package com.retainmvp.retainmvp
 
 import android.os.Bundle
 
-interface StoredStateConverter<out StoredState> {
+interface StoredStateConverter<StoredState> {
     fun convertToStoredState(bundle: Bundle): StoredState
+    fun convertStoredStateToBundle(bundle: Bundle, storedState: StoredState): Bundle
 }
