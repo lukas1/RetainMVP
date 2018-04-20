@@ -21,4 +21,8 @@ class MainActivityPresenter : Presenter<MainActivityView, MainActivityStoredStat
         storedState = storedState.copy(counterValue = storedState.counterValue + 1)
         updateView()
     }
+
+    fun onNewActivityButtonPressed() {
+        view?.startNewActivity(storedState.counterValue + 100)
+    }
 }
