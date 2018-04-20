@@ -1,7 +1,7 @@
 abstract class Presenter<View, StoredState> {
     protected var view: View? = null
         private set
-    var storedState: StoredState = defaultStoredState
+    protected var storedState: StoredState = defaultStoredState
         private set
 
     abstract val defaultStoredState: StoredState
@@ -14,7 +14,10 @@ abstract class Presenter<View, StoredState> {
 
     fun detachView() {
         view = null
+        onViewDetached()
     }
 
     protected abstract fun updateView(view: View)
+
+    protected fun onViewDetached() = {}
 }

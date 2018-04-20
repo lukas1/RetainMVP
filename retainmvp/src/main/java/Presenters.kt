@@ -1,3 +1,4 @@
+import android.os.Bundle
 import android.support.v4.app.FragmentManager
 import android.support.v7.app.AppCompatActivity
 
@@ -7,9 +8,12 @@ object Presenters {
     fun <P : Presenter<V, S>, V, S> getPresenterForActivity(
             activity: AppCompatActivity,
             presenterFactory: PresenterFactory<V, S, P>,
+            storedStateConverter: StoredStateConverter<S>,
             view: V,
-            storedState: S?
-    ): P = getPresenter(activity.supportFragmentManager, presenterFactory, view, storedState)
+            bundle: Bundle?
+    ): P = getPresenter(
+            activity.supportFragmentManager, presenterFactory, storedStateConverter, view, bundle
+    )
 
     private fun <P : Presenter<V, S>, V, S> getHolderFragment(
             fragmentManager: FragmentManager
@@ -26,10 +30,11 @@ object Presenters {
     private fun <P : Presenter<V, S>, V, S> getPresenter(
             fragmentManager: FragmentManager,
             presenterFactory: PresenterFactory<V, S, P>,
+            storedStateConverter: StoredStateConverter<S>,
             view: V,
-            storedState: S?
+            bundle: Bundle?
     ): P = getHolderFragment<P, V, S>(fragmentManager).let {
-        it.setup(presenterFactory, view, storedState)
+        it.setup(presenterFactory, view, storedStateConverter, bundle)
         it.presenter
     }
 }
